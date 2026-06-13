@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chat</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            max-width:800px;
+            margin:auto;
+            padding:20px;
+        }
+
+        #chatArea{
+            display:none;
+        }
+
+        #messages{
+            border:1px solid #ccc;
+            height:350px;
+            overflow-y:auto;
+            padding:10px;
+            margin-bottom:10px;
+        }
+
+        .msg{
+            margin:8px 0;
+            padding:8px;
+            border-radius:8px;
+            background:#f2f2f2;
+        }
+
+        input,select,button{
+            padding:10px;
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Internet Chat Demo</h2>
+
+<div id="loginArea">
+
+    <h3>Login</h3>
+
+    <input id="username" placeholder="Username">
+
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p>
+        Demo Accounts:<br>
+        a / 123<br>
+        b / 098
+    </p>
+
+</div>
+
+<div id="chatArea">
+
+    <h3 id="welcome"></h3>
+
+    <select id="receiver">
+        <option value="a">a</option>
+        <option value="b">b</option>
+    </select>
+
+    <div id="messages"></div>
+
+    <input id="messageText"
+           placeholder="Type message"
+           style="width:70%;">
+
+    <button onclick="sendMessage()">Send</button>
+
+</div>
+
+<script>
+
+let currentUser = "";
+
+async function login(){
+
+    const username =
+        document.getElementById("username").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    const response = await fetch("/login",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            username,
+            password
+        })
+    });
+
+    const data = await response.json();
+
+    if(data.success){
+
+        currentUser = data.username;
+
+        document.getElementById("loginArea")
+            .style.display="none";
+
+        document.getElementById("chatArea")
+            .style.display="block";
+
+        document.getElementById("welcome")
+            .innerText = "Logged in as " + currentUser;
+
+        loadMessages();
+
+        setInterval(loadMessages,2000);
+
+    }else{
+        alert("Login Failed");
+    }
+}
+
+async function sendMessage(){
+
+    const receiver =
+        document.getElementById("receiver").value;
+
+    const text =
+        document.getElementById("messageText").value;
+
+    await fetch("/send",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            sender:currentUser,
+            receiver:receiver,
+            text:text
+        })
+    });
+
+    document.getElementById("messageText").value="";
+
+    loadMessages();
+}
+
+async function loadMessages(){
+
+    const response =
+        await fetch("/messages/" + currentUser);
+
+    const data = await response.json();
+
+    const box =
+        document.getElementById("messages");
+
+    box.innerHTML = "";
+
+    data.forEach(msg => {
+
+        const div = document.createElement("div");
+
+        div.className = "msg";
+
+        div.innerHTML =
+            "<b>" + msg.sender +
+            "</b> ➜ <b>" +
+            msg.receiver +
+            "</b><br>" +
+            msg.text;
+
+        box.appendChild(div);
+    });
+
+    box.scrollTop = box.scrollHeight;
+}
+
+</script>
+
+</body>
+</html>
