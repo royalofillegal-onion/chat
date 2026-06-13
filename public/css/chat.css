@@ -1,0 +1,42 @@
+.message-list {
+  display: grid;
+  gap: 14px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+.message-bubble {
+  max-width: 90%;
+  padding: 14px 18px;
+  border-radius: 28px;
+  line-height: 1.6;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
+}
+.message-user {
+  justify-self: end;
+  background: linear-gradient(135deg, #7c5cff 0%, #5b3de0 100%);
+  color: #ffffff;
+  border-bottom-right-radius: 8px;
+}
+.message-bot {
+  justify-self: start;
+  background: rgba(255, 255, 255, 0.12);
+  color: #f5f5ff;
+  border-bottom-left-radius: 8px;
+}
+.message-meta {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+.chat-input-area {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+.chat-input-area input {
+  min-width: 0;
+}
+.chat-input-area button {
+  min-width: 110px;
+}

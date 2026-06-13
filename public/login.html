@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login · ChatBot</title>
+  <link rel="stylesheet" href="css/mobile.css" />
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-shell">
+    <section class="auth-card">
+      <div class="brand">ChatBot</div>
+      <p class="auth-copy">Sign in or create an account to access the chat experience.</p>
+      <form id="auth-form" class="auth-form">
+        <label>
+          Email
+          <input id="email" type="email" autocomplete="username" required />
+        </label>
+        <label>
+          Password
+          <input id="password" type="password" autocomplete="current-password" required minlength="6" />
+        </label>
+        <button id="submit-button" class="button primary" type="submit">Sign In</button>
+      </form>
+      <div class="auth-footer">
+        <span id="toggle-text">New here?</span>
+        <button id="toggle-mode" class="link-button" type="button">Create account</button>
+      </div>
+      <button id="google-signin" class="button secondary" type="button">Continue with Google</button>
+      <div id="error" class="error-message"></div>
+    </section>
+  </main>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

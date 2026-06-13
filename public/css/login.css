@@ -1,0 +1,10 @@
+.auth-card {
+  position: relative;
+}
+.auth-form button {
+  width: 100%;
+  margin-top: 8px;
+}
+.chat-input-area {
+  display: none;
+}

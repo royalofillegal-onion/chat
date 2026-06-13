@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat · ChatBot</title>
+  <link rel="stylesheet" href="css/mobile.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+<body class="chat-page">
+  <div class="chat-shell">
+    <header class="chat-header">
+      <div>
+        <div class="chat-brand">ChatBot</div>
+        <div id="user-name" class="chat-subtitle">Loading user...</div>
+      </div>
+      <button id="sign-out" class="button secondary">Sign Out</button>
+    </header>
+
+    <main class="chat-main">
+      <section id="messages" class="message-list" aria-label="Chat messages"></section>
+    </main>
+
+    <form id="chat-form" class="chat-input-area">
+      <input id="message-input" type="text" placeholder="Type a message" autocomplete="off" required />
+      <button class="button primary" type="submit">Send</button>
+    </form>
+  </div>
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>
